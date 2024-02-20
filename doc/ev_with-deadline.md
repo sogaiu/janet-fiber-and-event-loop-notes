@@ -12,9 +12,18 @@ code does not complete before the deadline is up, it will be canceled.
 ## Sample Code
 
 ```janet
-(ev/with-deadline 0.1
-                  (def p (os/spawn ["find" "/"] :p))
-                  (os/proc-wait p))
+(ev/with-deadline 0.01
+                  (ev/sleep 1)
+                  (pp :hi))
+```
+
+Sample output:
+
+```
+error: deadline expired
+  in ev/sleep [src/core/ev.c] on line 2945
+  in <anonymous> [repl] on line 2, column 19
+  in _thunk [repl] (tailcall) on line 1, column 1
 ```
 
 ## Janet Implementation
