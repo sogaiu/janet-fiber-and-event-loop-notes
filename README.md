@@ -78,6 +78,12 @@
 
   results in the output "nifty".
 
+* Consider code sample and associated description for choosing
+  arguments for `ev/deadline`.  Specifically, cover the case where
+  `tocancel` can arrange to take care of `tocheck`.  See the item
+  above about "catching errors that result from".  It's possible the
+  text could live near it.
+
 ## Questions
 
 * What do the following phrases mean in detail?
