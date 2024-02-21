@@ -7,11 +7,11 @@
 ### Option 1
 
 Create a fiber to execute `body`, schedule the event loop to cancel
-the root fiber associated with `body`'s fiber, and start `body`'s
-fiber by resuming it.
+the task (root fiber) associated with `body`'s fiber, and start
+`body`'s fiber by resuming it.
 
-The event loop will try to cancel the root fiber if `body`'s fiber has
-not completed after at least `sec` seconds.
+The event loop will try to cancel the aforementioned root fiber if
+`body`'s fiber has not completed after at least `sec` seconds.
 
 `sec` is a number that can have a fractional part.
 
