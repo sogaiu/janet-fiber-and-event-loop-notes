@@ -6,7 +6,7 @@
 
 Cancel a suspended fiber in the event loop.
 
-Differs from cancel in that it returns the canceled fiber immediately.
+Differs from `cancel` in that it returns the canceled fiber immediately.
 
 ## Sample Code
 
