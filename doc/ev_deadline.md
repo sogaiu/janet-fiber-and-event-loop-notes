@@ -16,17 +16,10 @@ If `tocheck` is not finished after `sec` seconds, the `tocancel` task
 If `tocancel` and `tocheck` are not given, they default to
 `(fiber/root)` and `(fiber/current)` respectively.
 
-> not sure one can say this function checks that `tocheck` can be
-> resumed (see [this link](https://github.com/janet-lang/janet/pull/1410/files#r1496771708))
-
-Note that that this function does not operate directly on `tocheck` or
+Note that this function does not operate directly on `tocheck` or
 `tocancel`, it only schedules a timeout after which the event loop
 checks on `tocheck` and if it finds `tocheck` to be resumable, tries
 to cancel `tocancel`.
-
-> confusion about whether waiting occurred before returning (see [this link](https://github.com/janet-lang/janet/pull/1410/files#r1496773272))
-
-Returns `tocancel`.
 
 ## Sample Code
 
