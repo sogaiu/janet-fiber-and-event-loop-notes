@@ -4,10 +4,11 @@
 
 `(ev/deadline sec &opt tocancel tocheck)`
 
-Schedules the event loop to try to cancel the `tocancel` task.
+Schedules the event loop to try to cancel the `tocancel` task as with
+`ev/cancel`.
 
-The cancellation will be attempted by the event loop if the `tocheck`
-fiber is resumable after `sec` seconds.
+The event loop will attempt cancellation of `tocancel` if the
+`tocheck` fiber is resumable after `sec` seconds.
 
 `sec` is a number that can have a fractional part.
 
