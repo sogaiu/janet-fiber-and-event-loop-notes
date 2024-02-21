@@ -4,16 +4,27 @@
 
 `(ev/deadline sec &opt tocancel tocheck)`
 
-Set a deadline for a fiber `tocheck`.
+Set a deadline for a fiber `tocheck` and immediately return
+`tocancel`.
 
-If `tocheck` is not finished after `sec` seconds, `tocancel` will be
-canceled as with `ev/cancel`.  Note that if `tocancel` is given, it
-must be a task / root fiber.
+If `tocheck` is not finished after `sec` seconds, the `tocancel` task
+(or root fiber) will be canceled by the event loop as with
+`ev/cancel`.
 
 `sec` is a number that can have a fractional part.
 
 If `tocancel` and `tocheck` are not given, they default to
 `(fiber/root)` and `(fiber/current)` respectively.
+
+> not sure one can say this function checks that `tocheck` can be
+> resumed (see [this link](https://github.com/janet-lang/janet/pull/1410/files#r1496771708))
+
+Note that that this function does not operate directly on `tocheck` or
+`tocancel`, it only schedules a timeout after which the event loop
+checks on `tocheck` and if it finds `tocheck` to be resumable, tries
+to cancel `tocancel`.
+
+> confusion about whether waiting occurred before returning (see [this link](https://github.com/janet-lang/janet/pull/1410/files#r1496773272))
 
 Returns `tocancel`.
 
