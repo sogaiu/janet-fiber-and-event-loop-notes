@@ -7,8 +7,8 @@
 Schedules the event loop to try to cancel the `tocancel` task as with
 `ev/cancel`.
 
-The event loop will attempt cancellation of `tocancel` if the
-`tocheck` fiber is resumable after `sec` seconds.
+After `sec` seconds, the event loop will attempt cancellation of
+`tocancel` if the `tocheck` fiber is resumable.
 
 `sec` is a number that can have a fractional part.
 
