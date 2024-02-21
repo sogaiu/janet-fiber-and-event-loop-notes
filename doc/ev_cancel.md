@@ -4,6 +4,14 @@
 
 `(ev/cancel fiber err)`
 
+> does this apply to non-task (non-root fibers) too?
+
+> what exactly does "suspended fiber" mean here?  see `fiber/status`
+> for ambiguity info.  there is a status named :suspended but the
+> phrase "the fiber is suspended" is used to describe fibers with
+> state :debug and :user(0-7).  of the fiber states, which ones count
+> for the purpose of this function?
+
 Cancel a suspended fiber in the event loop.
 
 Differs from `cancel` in that it returns the canceled fiber immediately.
@@ -142,6 +150,44 @@ JanetSignal janet_continue_signal(JanetFiber *fiber, Janet in, Janet *out, Janet
         child->flags |= JANET_FIBER_RESUME_SIGNAL;
     }
     return janet_continue_no_check(fiber, in, out);
+}
+```
+
+[`janet_check_can_resume` in `vm.c`](https://github.com/janet-lang/janet/blob/03ae2ec1537efee3259a77639932cddfc318e995/src/core/vm.c#L1393-L1425):
+
+```c
+static JanetSignal janet_check_can_resume(JanetFiber *fiber, Janet *out, int is_cancel) {
+    /* Check conditions */
+    JanetFiberStatus old_status = janet_fiber_status(fiber);
+    if (janet_vm.stackn >= JANET_RECURSION_GUARD) {
+        janet_fiber_set_status(fiber, JANET_STATUS_ERROR);
+        *out = janet_cstringv("C stack recursed too deeply");
+        return JANET_SIGNAL_ERROR;
+    }
+    /* If a "task" fiber is trying to be used as a normal fiber, detect that. See bug #920.
+     * Fibers must be marked as root fibers manually, or by the ev scheduler. */
+    if (janet_vm.fiber != NULL && (fiber->gc.flags & JANET_FIBER_FLAG_ROOT)) {
+#ifdef JANET_EV
+        *out = janet_cstringv(is_cancel
+                              ? "cannot cancel root fiber, use ev/cancel"
+                              : "cannot resume root fiber, use ev/go");
+#else
+        *out = janet_cstringv(is_cancel
+                              ? "cannot cancel root fiber"
+                              : "cannot resume root fiber");
+#endif
+        return JANET_SIGNAL_ERROR;
+    }
+    if (old_status == JANET_STATUS_ALIVE ||
+            old_status == JANET_STATUS_DEAD ||
+            (old_status >= JANET_STATUS_USER0 && old_status <= JANET_STATUS_USER4) ||
+            old_status == JANET_STATUS_ERROR) {
+        const uint8_t *str = janet_formatc("cannot resume fiber with status :%s",
+                                           janet_status_names[old_status]);
+        *out = janet_wrap_string(str);
+        return JANET_SIGNAL_ERROR;
+    }
+    return JANET_SIGNAL_OK;
 }
 ```
 
