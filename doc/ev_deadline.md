@@ -7,19 +7,15 @@
 Set a deadline for a fiber `tocheck` and immediately return
 `tocancel`.
 
-If `tocheck` is not finished after `sec` seconds, the `tocancel` task
-(or root fiber) will be canceled by the event loop as with
-`ev/cancel`.
-
 `sec` is a number that can have a fractional part.
 
-If `tocancel` and `tocheck` are not given, they default to
-`(fiber/root)` and `(fiber/current)` respectively.
+If the `tocancel` task (root fiber) and `tocheck` fiber are not given,
+they default to `(fiber/root)` and `(fiber/current)` respectively.
 
 Note that this function does not operate directly on `tocheck` or
-`tocancel`, it only schedules a timeout after which the event loop
-checks on `tocheck` and if it finds `tocheck` to be resumable, tries
-to cancel `tocancel`.
+`tocancel`, it only schedules a timeout of `sec` seconds.  After the
+timeout, the event loop checks on `tocheck` and if it finds `tocheck`
+to be resumable, tries to cancel `tocancel`.
 
 ## Sample Code
 
