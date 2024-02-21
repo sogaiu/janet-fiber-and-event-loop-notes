@@ -84,6 +84,21 @@
   above about "catching errors that result from".  It's possible the
   text could live near it.
 
+* Consider enhancing the pseudo-code for the event loop:
+
+    ```janet
+    # Functions that yield to the event loop will put (fiber/root) here.
+    (def pending-tasks @[])
+
+    # Pseudo-code of the event loop scheduler
+    (while (not (empty? pending-tasks))
+      (def [root-fiber data] (wait-for-next-event))
+      (resume root-fiber data))
+    ```
+
+  so that it also illustrates handling of timeouts and may be some
+  other bits?
+
 ## Questions
 
 * What do the following phrases mean in detail?
