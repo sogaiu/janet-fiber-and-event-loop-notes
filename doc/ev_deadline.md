@@ -11,10 +11,10 @@ fiber is resumable after `sec` seconds.
 
 `sec` is a number that can have a fractional part.
 
-`tocancel` defaults to `(fiber/root)`, but if not specified, must be a
+`tocancel` defaults to `(fiber/root)`, but if specified, must be a
 task (root fiber).
 
-`tocheck` defaults to `(fiber/current)`, but if not specified, is a
+`tocheck` defaults to `(fiber/current)`, but if specified, is a
 fiber.
 
 Returns `tocancel` immediately.
