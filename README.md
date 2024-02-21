@@ -99,6 +99,31 @@
   so that it also illustrates handling of timeouts and may be some
   other bits?
 
+## C Function Documentation
+
+```c
+JanetSignal janet_continue(JanetFiber *fiber, Janet in, Janet *out);
+```
+
+Resumes a new or suspended `fiber`. Returns a signal that corresponds
+to the status of the fiber after execution, and places the
+return/signal value in `out`. When resuming a fiber, the value to
+resume with should be in the argument `in`, which corresponds to the
+second argument to the Janet `resume` function.
+
+```c
+JanetSignal janet_continue_no_check(JanetFiber *fiber, Janet in, Janet *out);
+```
+
+Other `janet_continue*` functions are wrappers around this one.
+
+```c
+JanetSignal janet_continue_signal(JanetFiber *fiber, Janet in, Janet *out, JanetSignal sig);
+```
+
+Indirectly enables C functions that yield to the event loop to raise
+errors or other signals (via CHANGELOG).
+
 ## Questions
 
 * What do the following phrases mean in detail?
