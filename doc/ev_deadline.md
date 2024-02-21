@@ -198,6 +198,22 @@ static void pop_timeout(size_t index) {
 }
 ```
 
+[`janet_fiber_can_resume` in `fiber.c`](https://github.com/janet-lang/janet/blob/23b0fe9f8e9bcc391fe94b18db379c73f1e2c8a2/src/core/fiber.c#L644-L654):
+
+```c
+int janet_fiber_can_resume(JanetFiber *fiber) {
+    JanetFiberStatus s = janet_fiber_status(fiber);
+    int isFinished = s == JANET_STATUS_DEAD ||
+                     s == JANET_STATUS_ERROR ||
+                     s == JANET_STATUS_USER0 ||
+                     s == JANET_STATUS_USER1 ||
+                     s == JANET_STATUS_USER2 ||
+                     s == JANET_STATUS_USER3 ||
+                     s == JANET_STATUS_USER4;
+    return !isFinished;
+}
+```
+
 [`janet_cancel`, `janet_schedule`, and related in `ev.c`](https://github.com/janet-lang/janet/blob/9142f38cbceb72e7d2d8a12846d2c22c2322fc34/src/core/ev.c#L477-L508):
 
 ```c
