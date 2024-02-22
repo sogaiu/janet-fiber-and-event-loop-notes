@@ -15,8 +15,8 @@ After `sec` seconds, the event loop will attempt cancellation of
 `tocancel` defaults to `(fiber/root)`, but if specified, must be a
 task (root fiber).
 
-`tocheck` defaults to `(fiber/current)`, but if specified, should be a
-fiber.
+`tocheck` defaults to `(fiber/current)`, but if specified, can be any
+type of fiber.
 
 Returns `tocancel` immediately.
 
