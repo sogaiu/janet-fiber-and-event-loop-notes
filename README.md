@@ -246,6 +246,7 @@ errors or other signals (via CHANGELOG).
     * file/write
   * `os/sleep`
   * `getline`
+  * `ev/read` can block if working with something returned from `os/open` (see [this](https://github.com/janet-lang/janet/issues/1397))
 
 ## Resolved Questions
 
