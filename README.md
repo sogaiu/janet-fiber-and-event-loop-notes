@@ -149,6 +149,12 @@ errors or other signals (via CHANGELOG).
       * :user(0-7) - the fiber is suspended by a user signal
       * :suspended - the fiber is waiting to be resumed by the scheduler
 
+    * [`is_suspended` in `janet_loop1` in `ev.c`](https://github.com/janet-lang/janet/blob/03ae2ec1537efee3259a77639932cddfc318e995/src/core/ev.c#L1334):
+
+        ```c
+        int is_suspended = sig == JANET_SIGNAL_EVENT || sig == JANET_SIGNAL_YIELD || sig == JANET_SIGNAL_INTERRUPT;
+        ```
+
   * Pending
 
     * "...a pending fiber"
