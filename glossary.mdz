@@ -10,8 +10,8 @@ reference and more consistent communication and thought.  Note that
 there is a tendency in typical English language writing to push toward
 using different words in nearby text and this can lead to more
 confusion especially when dealing with technical concepts.  A glossary
-can also be helpful in selecting appropriate terms but also listing
-synonyms that are already in use.
+can also be helpful in selecting appropriate terms for documentation
+and communication but also listing synonyms that are already in use.
 
 * channel - one of two methods of communication between tasks.  (See
   stream for another.)
