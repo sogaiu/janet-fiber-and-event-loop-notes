@@ -11,8 +11,6 @@
 
 ## Possible Website Doc Changes
 
-* Add a glossary
-
 * Regarding channels, the text: "and only work inside a thread"
   appears in the Task Communication section of the Event Loop page.
   There are threaded channels now so the text seems a bit off.
