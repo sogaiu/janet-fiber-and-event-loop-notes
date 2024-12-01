@@ -5,6 +5,7 @@
 * [cancel](doc/cancel.md)
 * [ev/cancel](doc/ev_cancel.md)
 * [ev/deadline](doc/ev_deadline.md)
+* [ev/read](doc/ev_read.md)
 * [ev/with-deadline](doc/ev_with-deadline.md)
 * [fiber/status](doc/fiber_status.md)
 * [resume](doc/resume.md)
