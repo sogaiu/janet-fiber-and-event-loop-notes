@@ -5,7 +5,7 @@
 * [cancel](doc/cancel.md)
 * [ev/cancel](doc/ev_cancel.md)
 * [ev/deadline](doc/ev_deadline.md)
-* [ev/read](doc/ev_read.md)
+* [ev/read](doc/ev_read.md) and [net/read](doc/net_read.md)
 * [ev/with-deadline](doc/ev_with-deadline.md)
 * [fiber/status](doc/fiber_status.md)
 * [resume](doc/resume.md)
@@ -209,6 +209,9 @@ errors or other signals (via CHANGELOG).
   * `os/sleep`
   * `getline`
   * `ev/read` can block if working with something returned from `os/open` (see [this](https://github.com/janet-lang/janet/issues/1397))
+
+* When should one choose `net/read` (or `net/write` or `net/chunk`) over
+  `ev/read` (or `ev/write` or `ev/chunk`)?
 
 ## Resolved Questions
 
